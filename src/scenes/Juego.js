@@ -144,6 +144,27 @@ import Phaser from 'phaser'
 
      //NIVEL 2
      if (this.nivel == 2) {
+        this.enemigos4 = this.physics.add.group();
+        this.enemigos4.create(2000, 100, 'enemigoN2}}').setScale(.7);
+         this.enemigos4.create(2500, 300, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(3500, 300, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(3600, 100, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(4400, 300, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(5300, 200, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(5800, 500, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(6300, 300, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(6800, 100, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(8100, 100, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(8300, 300, 'enemigoN2').setScale(.7);
+         this.enemigos4.create(9700, 500, 'enemigoN2').setScale(.7);  
+  
+         //TIEMPO
+       this.TiempoInicial = 60
+       this.TimeEvent = this.time.addEvent({ delay: 1000, callback: this.timer, callbackScope: this, loop: true });
+       this.timeText = this.add.text(1190, 30, '', {fontSize: '50px', });
+       this.timeText.setScrollFactor(0);
+
+
      }
    }
 
