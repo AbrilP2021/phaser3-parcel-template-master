@@ -1,265 +1,257 @@
-import Phaser from 'phaser'
+import Phaser from "phaser";
+import { sharedInstance as events } from "./EventCenter";
 
- export default class Juego extends Phaser.Scene {
-   player;
-   platform;
-   brillo;
-   cursors;
-   puntos;
-   extopuntos;
-   Recogerbrillo;
-   Enemigos;
-   VidaJugador;
-   TextoVidaJugador;
-   textopuntos;
-   recogerbrillo;
-   timeText;
-   TiempoInicial;
-   textoVidaJugador;
-   TimeEvent;
-   superganador;
+export default class Juego extends Phaser.Scene {
+  player;
+  platform;
+  brillo;
+  cursors;
+  puntos;
+  Recogerbrillo;
+  Enemigos;
+  VidaJugador;
+  TextoVidaJugador;
+  textopuntos;
+  recogerbrillo;
+  timeText;
+  TiempoInicial;
+  textoVidaJugador;
+  TimeEvent;
+  superganador;
+  enemigos;
+  plataform;
 
-   constructor() {
-     super("Juego");
-   }
+  constructor() {
+    super("Juego");
+  }
 
-   init(data) {
-     this.nivel = data.nivel;
-   }
+  init(data) {
+    this.nivel = data.nivel;
+  }
 
-   preload() {}
+  preload() {}
 
-   create() {
-     console.log("nivel ", this.nivel);
+  create() {
+    console.log("nivel ", this.nivel);
 
-     this.cameras.main.setBounds(0, 0, 10500, 768);
-     this.physics.world.bounds.width = 10500;
-     this.physics.world.bounds.height = 1537;
+    this.puntos = 0;
 
-     this.add.image(0, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
-     this.add.image(5450, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
+    this.cameras.main.setBounds(0, 0, 10500, 768);
+    this.physics.world.bounds.width = 10500;
+    this.physics.world.bounds.height = 1537;
 
-     this.add.image(0, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
-     this.add.image(5450, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
+    if (this.nivel === 1) {
+      this.add.image(0, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
+      this.add.image(800, 900, "FondoNivelUno").setOrigin(0).setScale(0.5);
+    } else {
+      this.add.image(0, 0, "FondoNivelDos").setOrigin(0).setScale(0.5);
+      this.add.image(800, 900, "FondoNivelDos").setOrigin(0).setScale(0.5);
+    }
 
-     //PLATAFORMAS
-     
-     this.platform = this.physics.add.staticGroup();
-     this.platform.setOrigin(0);
-     this.platform.create(0, 718, "SueloNivelUno").setScale(0.5).refreshBody();
-     this.platform
-       .create(2500, 718, "SueloNivelUno")
-       .setScale(0.5)
-       .refreshBody();
-     this.platform
-       .create(5500, 718, "SueloNivelUno")
-       .setScale(0.5)
-       .refreshBody();
-     this.platform
-       .create(8200, 718, "SueloNivelUno")
-       .setScale(0.5)
-       .refreshBody();
-     this.platform.create(500, 520, "p1");
-     this.platform.create(1200, 520, "p1");
-     this.platform.create(850, 330, "p1");
-     this.platform.create(1750, 330, "p2");
-     this.platform.create(2500, 520, "p2");
-     this.platform.create(1750, 150, "p1");
-     this.platform.create(2500, 150, "p1");
-     this.platform.create(3300, 520, "p1");
-     this.platform.create(3750, 330, "p1");
-     this.platform.create(4300, 330, "p1");
-     this.platform.create(5000, 330, "p1");
-     this.platform.create(4800, 520, "p1");
-     this.platform.create(5800, 520, "p2");
-     this.platform.create(6400, 330, "p1");
-     this.platform.create(7000, 150, "p1");
-     this.platform.create(6800, 520, "p1");
-     this.platform.create(5800, 150, "p1");
-     this.platform.create(7500, 330, "p1");
-     this.platform.create(8200, 520, "p2");
-     this.platform.create(9000, 330, "p2");
+    //ENEMIGOS
 
-     //LLEGADA
+    this.enemigos = this.physics.add.staticGroup();
+    this.enemigos.create(1000, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(2400, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(3500, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(3600, 648, "pinches3").setScale(0.5);
+    this.enemigos.create(4400, 648, "pinches2").setScale(0.5);
+    this.enemigos.create(5300, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(5800, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(6300, 648, "pinches2").setScale(0.5);
+    this.enemigos.create(6800, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(8100, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(8300, 648, "pinches1").setScale(0.5);
+    this.enemigos.create(9700, 648, "pinches2").setScale(0.5);
 
-     this.add.image(1250, 720, "teclas").setScale(0.5).setScrollFactor(0);
-     this.add.image(150, 60, "uipower").setScale(0.9).setScrollFactor(0);
-     this.add.image(1250, 50, "cronometro").setScale(0.4).setScrollFactor(0);
-     this.add.image(80, 720, "corazon").setScale(0.9).setScrollFactor(0);
+    this.enemigos.refresh();
 
-     //PERSONAJE
+    this.physics.add.collider(this.enemigos, this.platform);
 
-     this.player = this.physics.add.sprite(100, 590, "Jugador");
-     this.player.setBounce(0.2);
-     this.player.setCollideWorldBounds(true);
-     this.player.setScale(2);
-     this.cameras.main.startFollow(this.player);
+    //PLATAFORMAS
 
-     //ANIMACION
+    this.platform = this.physics.add.staticGroup();
+    this.platform.setOrigin(0);
+    this.platform.create(0, 718, "SueloNivelUno").setScale(0.5).refreshBody();
+    this.platform
+      .create(2500, 718, "SueloNivelUno")
+      .setScale(0.5)
+      .refreshBody();
+    this.platform
+      .create(5500, 718, "SueloNivelUno")
+      .setScale(0.5)
+      .refreshBody();
+    this.platform
+      .create(8200, 718, "SueloNivelUno")
+      .setScale(0.5)
+      .refreshBody();
+    this.platform.create(500, 520, "p1");
+    this.platform.create(1200, 520, "p1");
+    this.platform.create(850, 330, "p1");
+    this.platform.create(1750, 330, "p2");
+    this.platform.create(2500, 520, "p2");
+    this.platform.create(1750, 150, "p1");
+    this.platform.create(2500, 150, "p1");
+    this.platform.create(3300, 520, "p1");
+    this.platform.create(3750, 330, "p1");
+    this.platform.create(4300, 330, "p1");
+    this.platform.create(5000, 330, "p1");
+    this.platform.create(4800, 520, "p1");
+    this.platform.create(5800, 520, "p2");
+    this.platform.create(6400, 330, "p1");
+    this.platform.create(7000, 150, "p1");
+    this.platform.create(6800, 520, "p1");
+    this.platform.create(5800, 150, "p1");
+    this.platform.create(7500, 330, "p1");
+    this.platform.create(8200, 520, "p2");
+    this.platform.create(9000, 330, "p2");
 
-     this.anims.create({
-       key: "left",
-       frames: this.anims.generateFrameNumbers("Jugador", { start: 0, end: 3 }),
-       frameRate: 10,
-       repeat: -1,
-     });
-     this.anims.create({
-       key: "turn",
-       frames: [{ key: "Jugador", frame: 4 }],
-       frameRate: 20,
-     });
-     this.anims.create({
-       key: "right",
-       frames: this.anims.generateFrameNumbers("Jugador", { start: 5, end: 8 }),
-       frameRate: 10,
-       repeat: -1,
-     });
+    //LLEGADA
 
-     this.physics.add.collider(this.player, this.platform);
+    this.add.image(1250, 720, "teclas").setScale(0.5).setScrollFactor(0);
+    this.add.image(1250, 50, "cronometro").setScale(0.4).setScrollFactor(0);
+    this.add.image(80, 720, "corazon").setScale(0.9).setScrollFactor(0);
 
-     //TECLADO
+    //PERSONAJE
 
-     if ((this.cursors = !undefined)) {
-       this.cursors = this.input.keyboard.createCursorKeys();
-     }
-     //POWER
+    this.player = this.physics.add.sprite(100, 590, "Jugador");
+    this.player.setBounce(0.2);
+    this.player.setCollideWorldBounds(true);
+    this.player.setScale(2);
+    this.cameras.main.startFollow(this.player);
 
-     this.brillo = this.physics.add.group({
-       key: "power",
-       repeat: 200,
-       setXY: { x: 30, y: 0, stepX: 350 },
-     });
-     this.brillo.children.iterate(function (child) {
-       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-     });
+    //ANIMACION
 
-     this.physics.add.collider(this.brillo, this.platform);
-     this.physics.add.overlap(
-       this.player,
-       this.brillo,
-       this.collectBrillo,
-       null,
-       this
-     );
+    this.anims.create({
+      key: "left",
+      frames: this.anims.generateFrameNumbers("Jugador", { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "turn",
+      frames: [{ key: "Jugador", frame: 4 }],
+      frameRate: 20,
+    });
+    this.anims.create({
+      key: "right",
+      frames: this.anims.generateFrameNumbers("Jugador", { start: 5, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    });
 
-     //NIVEL 2
-     if (this.nivel == 2) {
-        this.enemigos4 = this.physics.add.group();
-        this.enemigos4.create(2000, 100, 'enemigoN2}}').setScale(.7);
-         this.enemigos4.create(2500, 300, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(3500, 300, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(3600, 100, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(4400, 300, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(5300, 200, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(5800, 500, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(6300, 300, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(6800, 100, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(8100, 100, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(8300, 300, 'enemigoN2').setScale(.7);
-         this.enemigos4.create(9700, 500, 'enemigoN2').setScale(.7);  
-  
-         //TIEMPO
-       this.TiempoInicial = 60
-       this.TimeEvent = this.time.addEvent({ delay: 1000, callback: this.timer, callbackScope: this, loop: true });
-       this.timeText = this.add.text(1190, 30, '', {fontSize: '50px', });
-       this.timeText.setScrollFactor(0);
+    this.physics.add.collider(this.player, this.platform);
 
+    //TECLADO
 
-     }
-   }
+    if ((this.cursors = !undefined)) {
+      this.cursors = this.input.keyboard.createCursorKeys();
+    }
+    //POWER
 
-   update() {
-     //MOVIMIENTO JUGADOR
-     if (this.cursors.left.isDown) {
-       this.player.setVelocityX(-450);
-       this.player.anims.play("left", true);
-     } else if (this.cursors.right.isDown) {
-       this.player.setVelocityX(450);
-       this.player.anims.play("right", true);
-     } else {
-       this.player.setVelocityX(0);
-       this.player.anims.play("turn");
-     }
-     if (this.cursors.up.isDown && this.player.body.touching.down) {
-       this.player.setVelocityY(-430);
-     }
-   }
+    this.brillo = this.physics.add.group({
+      key: "power",
+      repeat: 200,
+      setXY: { x: 30, y: 0, stepX: 350 },
+    });
+    this.brillo.children.iterate(function (child) {
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
 
-   collectBrillo(player, brillo) {
-     brillo.disableBody(true, true);
-     this.puntos += 1;
-     this.textopuntos.setText("30/" + this.puntos);
-     this.recogerbrillo.play();
-     return false;
-   }
+    this.physics.add.collider(this.brillo, this.platform);
+    this.physics.add.overlap(
+      this.player,
+      this.brillo,
+      this.collectBrillo,
+      null,
+      this
+    );
 
-   hitEnemigo(player, enemigos) {
-     enemigos.disableBody(true, true);
-     this.vidaJugador -= 1;
-     this.textoVidaJugador.setText(" " + this.vidaJugador);
-     if (this.vidaJugador === 0) {
-       this.gameOver();
-     }
-   }
-   gameOver() {
-     this.physics.pause();
-     this.player.setTint(0xffff00);
-     this.player.anims.play("turn");
-     this.TimeEvent.paused = true;
-     this.puntos = 0;
-     this.vidaJugador = 3;
-     this.scene.start("GameOver");
-   }
+    //NIVEL 2
+    if (this.nivel == 2) {
+      console.log("Nivel 2");
+      this.enemigos = this.physics.add.group();
+      this.enemigos.create(2000, 100, "pinches1").setScale(0.7);
+      this.enemigos.create(2500, 300, "pinches2").setScale(0.7);
+      this.enemigos.create(3500, 300, "pinches2").setScale(0.7);
+      this.enemigos.create(3600, 100, "pinches2").setScale(0.7);
+      this.enemigos.create(4400, 300, "pinches2").setScale(0.7);
+      this.enemigos.create(5300, 200, "pinches2").setScale(0.7);
+      this.enemigos.create(5800, 500, "pinches2").setScale(0.7);
+      this.enemigos.create(6300, 300, "pinches2").setScale(0.7);
+      this.enemigos.create(6800, 100, "pinches2").setScale(0.7);
+      this.enemigos.create(8100, 100, "pinches2").setScale(0.7);
+      this.enemigos.create(8300, 300, "pinches3").setScale(0.7);
+      this.enemigos.create(9700, 500, "pinches2").setScale(0.7);
+    }
 
-   timer() {
-     if (!this.gameOver) {
-       this.TiempoInicial = this.TiempoInicial - 1;
+    this.physics.add.collider(this.player, this.enemigos);
 
-       this.timeText.setText(" " + this.TiempoInicial);
+    //TIEMPO
 
-       if (this.TiempoInicial == 0) {
-         this.TimeEvent.paused = true;
+    this.TiempoInicial = this.nivel == 1 ? 90 : 60;
+    console.log("tiempo inicial " + this.TiempoInicial);
 
-         this.gameOver();
-       }
-     }
-   }
-   po1(werplayer, inflapts) {
-     inflapts.disableBody(true, true);
-     this.vidaJugador += 1;
-     this.textoVidaJugador.setText(" " + this.vidaJugador);
-     return false;
-   }
-   power2(player, relojtiempo) {
-     relojtiempo.destroy();
-     this.TiempoInicial += 5;
-     this.timeText.setText(" " + this.TiempoInicial);
-     return false;
-   }
+    this.TimeEvent = this.time.addEvent({
+      delay: 1000,
+      callback: this.timer,
+      callbackScope: this,
+      loop: true,
+    });
 
-   maspower(player, powerup2) {
-     powerup2.destroy();
-     if (this.vidaJugador >= 3) {
-       this.puntos += 10;
-       this.textopuntos.setText("30/" + this.puntos);
-     } else {
-       this.TiempoInicial += 15;
-       this.timeText.setText(" " + this.TiempoInicial);
-     }
-     return false;
-   }
+    if (this.nivel == 1) {
+      this.scene.launch("ui");
+    }
 
-   ganarpartida(player, ganarCasita) {
-     if (this.puntos >= 30) {
-       this.superganador.play();
-       this.ganaste();
-     }
-   }
+    //VIDAS
 
-   ganaste() {
-     this.scene.start("Ganador", { nivel: this.nivel });
-   }
-   perdiste() {
-     this.scene.start("Perdedor", { nivel: this.nivel });
-   }
- }
+    console.log("vidas ");
+  }
+
+  update() {
+    //MOVIMIENTO JUGADOR
+    if (this.cursors.left.isDown) {
+      this.player.setVelocityX(-450);
+      this.player.anims.play("left", true);
+    } else if (this.cursors.right.isDown) {
+      this.player.setVelocityX(450);
+      this.player.anims.play("right", true);
+    } else {
+      this.player.setVelocityX(0);
+      this.player.anims.play("turn");
+    }
+    if (this.cursors.up.isDown && this.player.body.touching.down) {
+      this.player.setVelocityY(-430);
+    }
+  }
+
+  collectBrillo(player, brillo) {
+    brillo.disableBody(true, true);
+    this.puntos += 1;
+    events.emit("point-changed", this.puntos);
+
+    if (this.puntos == 5) {
+      this.scene.start("Ganaste", { nivel: this.nivel });
+    }
+    return false;
+  }
+
+  gameOver() {
+    this.scene.start("Perdiste");
+  }
+
+  timer() {
+    console.log("tiempo restante " + this.TiempoInicial);
+    if (!this.gameOver) {
+      this.TiempoInicial = this.TiempoInicial - 1;
+
+      events.emit("time-changed", this.TiempoInicial);
+
+      if (this.TiempoInicial == 0) {
+        this.TimeEvent.paused = true;
+
+        this.gameOver();
+      }
+    }
+  }
+}
