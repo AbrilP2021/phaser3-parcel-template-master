@@ -28,15 +28,12 @@ export default class Ganaste extends Phaser.Scene {
 
     const botonmenu2 = this.add.image(700, 550, "BotonM").setScale(0.4);
     botonmenu2.setInteractive();
-    botonmenu2.on("pointerdown", () => this.scene.start("Menu"));
+    botonmenu2.on("pointerdown", () => this.scene.start("MenuPrincipal"));
 
-    this.text = this.add
-      .text(599, 520, "MENU", { font: "150px Cocogoose" })
-      .setScale(0.4);
+    this.text = this.add.text(599, 520, "MENU", { font: "150px Cocogoose" }).setScale(0.4);
 
   
-    botonsiguiente.setInteractive();
-    botonsiguiente.on("pointerdown", () => this.scene.start("MenuPrincipal"));
+  
 
     this.text = this.add
     .text(460, 100, "GANASTE", { font: "250px Cocogoose" })
