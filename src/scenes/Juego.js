@@ -41,8 +41,10 @@ export default class Juego extends Phaser.Scene {
     this.physics.world.bounds.height = 1537;
 
     if (this.nivel === 1) {
+      
       this.add.image(0, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
       this.add.image(800, 900, "FondoNivelUno").setOrigin(0).setScale(0.5);
+  
     } else {
       this.add.image(0, 0, "FondoNivelDos").setOrigin(0).setScale(0.5);
       this.add.image(800, 900, "FondoNivelDos").setOrigin(0).setScale(0.5);
@@ -187,7 +189,7 @@ export default class Juego extends Phaser.Scene {
     this.puntos += 1;
     events.emit("point-changed", this.puntos);
 
-    if (this.puntos == 5) {
+    if (this.puntos == 30) {
       this.scene.start("Ganaste", { nivel: this.nivel });
     }
     return false;
