@@ -20,6 +20,8 @@ export default class Juego extends Phaser.Scene {
   superganador;
   enemigos;
   plataform;
+  background;
+
 
   constructor() {
     super("Juego");
@@ -44,6 +46,7 @@ export default class Juego extends Phaser.Scene {
       
       this.add.image(0, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
       this.add.image(800, 900, "FondoNivelUno").setOrigin(0).setScale(0.5);
+     
   
     } else {
       this.add.image(0, 0, "FondoNivelDos").setOrigin(0).setScale(0.5);

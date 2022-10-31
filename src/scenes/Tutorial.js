@@ -13,18 +13,15 @@ export default class Tutorial extends Phaser.Scene {
     console.log("nivel ", this.nivel);
     this.add.image(0, 0, "FondoTuto").setOrigin(0).setScale(0.5);
     const botontuto = this.add
-      .image(610, 550, "BotonJ")
+      .image(550, 500, "BotonJ")
       .setOrigin(0)
-      .setScale(0.2);
+      .setScale(0.3);
     botontuto.setInteractive();
     botontuto.on("pointerdown", () =>
       this.scene.start("Juego", { nivel: this.nivel })
     );
 
-    this.text = this.add
-      .text(650, 560, "JUGAR", { font: "70px Cocogoose" })
-      .setScale(0.4);
-
+    
     this.text = this.add
       .text(540, 100, "TUTORIAL", { font: "150px Cocogoose" })
       .setScale(0.4);
