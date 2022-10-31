@@ -48,26 +48,6 @@ export default class Juego extends Phaser.Scene {
       this.add.image(800, 900, "FondoNivelDos").setOrigin(0).setScale(0.5);
     }
 
-    //ENEMIGOS
-
-    this.enemigos = this.physics.add.staticGroup();
-    this.enemigos.create(1000, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(2400, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(3500, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(3600, 648, "pinches3").setScale(0.5);
-    this.enemigos.create(4400, 648, "pinches2").setScale(0.5);
-    this.enemigos.create(5300, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(5800, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(6300, 648, "pinches2").setScale(0.5);
-    this.enemigos.create(6800, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(8100, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(8300, 648, "pinches1").setScale(0.5);
-    this.enemigos.create(9700, 648, "pinches2").setScale(0.5);
-
-    this.enemigos.refresh();
-
-    this.physics.add.collider(this.enemigos, this.platform);
-
     //PLATAFORMAS
 
     this.platform = this.physics.add.staticGroup();
@@ -110,7 +90,7 @@ export default class Juego extends Phaser.Scene {
 
     this.add.image(1250, 720, "teclas").setScale(0.5).setScrollFactor(0);
     this.add.image(1250, 50, "cronometro").setScale(0.4).setScrollFactor(0);
-    this.add.image(80, 720, "corazon").setScale(0.9).setScrollFactor(0);
+  
 
     //PERSONAJE
 
@@ -167,30 +147,10 @@ export default class Juego extends Phaser.Scene {
       this
     );
 
-    //NIVEL 2
-    if (this.nivel == 2) {
-      console.log("Nivel 2");
-      this.enemigos = this.physics.add.group();
-      this.enemigos.create(2000, 100, "pinches1").setScale(0.7);
-      this.enemigos.create(2500, 300, "pinches2").setScale(0.7);
-      this.enemigos.create(3500, 300, "pinches2").setScale(0.7);
-      this.enemigos.create(3600, 100, "pinches2").setScale(0.7);
-      this.enemigos.create(4400, 300, "pinches2").setScale(0.7);
-      this.enemigos.create(5300, 200, "pinches2").setScale(0.7);
-      this.enemigos.create(5800, 500, "pinches2").setScale(0.7);
-      this.enemigos.create(6300, 300, "pinches2").setScale(0.7);
-      this.enemigos.create(6800, 100, "pinches2").setScale(0.7);
-      this.enemigos.create(8100, 100, "pinches2").setScale(0.7);
-      this.enemigos.create(8300, 300, "pinches3").setScale(0.7);
-      this.enemigos.create(9700, 500, "pinches2").setScale(0.7);
-    }
-
-    this.physics.add.collider(this.player, this.enemigos);
-
     //TIEMPO
 
     this.TiempoInicial = this.nivel == 1 ? 90 : 60;
-    console.log("tiempo inicial " + this.TiempoInicial);
+    console.log("tiempoinicial" + this.TiempoInicial);
 
     this.TimeEvent = this.time.addEvent({
       delay: 1000,
@@ -203,9 +163,6 @@ export default class Juego extends Phaser.Scene {
       this.scene.launch("ui");
     }
 
-    //VIDAS
-
-    console.log("vidas ");
   }
 
   update() {

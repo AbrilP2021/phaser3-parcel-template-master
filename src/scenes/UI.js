@@ -16,17 +16,14 @@ export default class UI extends Phaser.Scene {
       font: "40px",
     });
 
-    this.timeText = this.add.text(120, 50, "", {
-      font: "40px",
+    this.timeText = this.add.text(1200, 40, "tiempo", {
+      font: "30px",
     });
 
-    this.lifeText = this.add.text(120, 50, "", {
-      font: "40px",
-    });
-
+    
     events.on("point-changed", this.handlePointChanged, this);
     events.on("time-changed", this.handleTimeChanged, this);
-    events.on("life-changed", this.handleLifeChanged, this);
+    
   }
 
   handlePointChanged(points) {
@@ -37,7 +34,5 @@ export default class UI extends Phaser.Scene {
   handleTimeChanged(time) {
     this.timeText.setText(" " + time);
   }
-  handleLifeChanged(VidaJugador) {
-    this.timeText.setText(VidaJugador + "/3");
-  }
+  
 }

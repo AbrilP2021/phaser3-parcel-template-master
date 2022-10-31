@@ -23,7 +23,7 @@ export default class Ganaste extends Phaser.Scene {
     });
 
     this.text = this.add
-      .text(700, 400, "SIGUIENTE", { font: "30px Arial" })
+      .text(550,370, "SIGUIENTE", { font: "130px Cocogoose" })
       .setScale(0.4);
 
     const botonmenu2 = this.add.image(700, 550, "BotonM").setScale(0.4);
@@ -31,17 +31,17 @@ export default class Ganaste extends Phaser.Scene {
     botonmenu2.on("pointerdown", () => this.scene.start("Menu"));
 
     this.text = this.add
-      .text(700, 550, "MENU", { font: "30px Arial" })
+      .text(599, 520, "MENU", { font: "150px Cocogoose" })
       .setScale(0.4);
 
-    this.add.image(0, 0, "ganaste").setOrigin(0).setScale(0.5);
-    const botonseguir = this.add.image(700, 500, "botonseguir").setScale(0.4);
-    botonseguir.setInteractive();
-    botonseguir.on("pointerdown", () => this.scene.start("MenuPrincipal"));
+  
+    botonsiguiente.setInteractive();
+    botonsiguiente.on("pointerdown", () => this.scene.start("MenuPrincipal"));
 
     this.text = this.add
-      .text(700, 500, "SEGUIR", { font: "30px Arial" })
-      .setScale(0.4);
+    .text(460, 100, "GANASTE", { font: "250px Cocogoose" })
+    .setScale(0.4);
+   
   }
   update() {}
 }

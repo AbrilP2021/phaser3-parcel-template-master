@@ -14,15 +14,15 @@ export default class MenuPrincipal extends Phaser.Scene {
     );
 
     this.text = this.add
-      .text(700, 400, "JUGAR", { font: "30px Arial" })
-      .setScale(0.2);
+      .text(650, 382, "JUGAR", { font: "70px Cocogoose" })
+      .setScale(0.4);
 
     const botoninfo = this.add.image(700, 550, "BotonI").setScale(0.2);
     botoninfo.setInteractive();
     botoninfo.on("pointerdown", () => this.scene.start("Creditos"));
 
     this.text = this.add
-      .text(700, 550, "CREDITOS", { font: "30px Arial" })
+      .text(628, 535, "CREDITOS", { font: "70px Cocogoose" })
       .setScale(0.4);
   }
   update() {}
