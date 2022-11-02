@@ -20,14 +20,14 @@ export default class Perdiste extends Phaser.Scene {
     botonmenucito.setInteractive();
     botonmenucito.on("pointerdown", () => this.scene.start("MenuPrincipal"));
 
-    this.text = this.add.text(599, 520, "MENU", { font: "150px Cocogoose" }) .setScale(0.4);
+    this.text = this.add.text(599, 520, getPhrase("MENU"), { font: "150px Cocogoose" }) .setScale(0.4);
 
     this.text = this.add
-    .text(460, 100, "PERDISTE", { font: "250px Cocogoose" })
+    .text(460, 100, getPhrase("PERDISTE"), { font: "250px Cocogoose" })
     .setScale(0.4);
 
     this.text = this.add
-    .text(550,370, "REINICIAR", { font: "130px Cocogoose" })
+    .text(550,370, getPhrase("REINICIAR"), { font: "130px Cocogoose" })
     .setScale(0.4);
 
 

@@ -11,11 +11,12 @@ export default class Creditos extends Phaser.Scene {
     botonmenu.setInteractive();
     botonmenu.on("pointerdown", () => this.scene.start("MenuPrincipal"));
 
-    this.text = this.add.text(650, 630, "MENÚ", { font: "70px Cocogoose" }) .setScale(0.4);
+    this.text = this.add.text(650, 630, getPhrase("MENÚ"), { font: "70px Cocogoose" }) .setScale(0.4);
 
-    this.text = this.add.text(540, 150, "CREDITOS", { font: "150px Cocogoose" }) .setScale(0.4);
+    this.text = this.add.text(540, 150, getPhrase("CREDITOS"), { font: "150px Cocogoose" }) .setScale(0.4);
 
-    this.text = this.add.text(450, 300, "Arte y Programación", { font: "100px Cocogoose" }) .setScale(0.4);
+    this.text = this.add.text(450, 300, getPhrase("ARTE Y PROGRAMACIÓN"), { font: "100px Cocogoose" }) .setScale(0.4);
+    
     this.text = this.add.text(570, 380, "Abril Pellegrinet", { font: "70px Cocogoose" }) .setScale(0.4);
   }
   update() {}

@@ -16,13 +16,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image("flecha", "./assets/flechacasa.png");
     this.load.image("teclas", "./assets/controles.png");
     this.load.image("power", "./assets/brillo.png");
-    this.load.image("pinches1", "./assets/enemigos1.png");
     this.load.image("uipower", "./assets/uibrillos.png");
-    this.load.image("pinches2", "./assets/enemigos2.png");
-    this.load.image("pinches3", "./assets/enemigos3.png");
     this.load.image("cronometro", "./assets/Tiempo.png");
-    this.load.image("infla", "./assets/inflador.png");
-    this.load.image("banderita", "./assets/bandera.png");
     this.load.image("reloj", "./assets/relojtiempo.png");
 
     this.load.image("FondoWin", "./assets/tesalvaste.png");

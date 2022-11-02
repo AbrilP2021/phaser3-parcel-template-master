@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { getPhrase } from "../services/translations";
 
 export default class Tutorial extends Phaser.Scene {
   constructor() {
@@ -23,11 +24,11 @@ export default class Tutorial extends Phaser.Scene {
 
     
     this.text = this.add
-      .text(540, 100, "TUTORIAL", { font: "150px Cocogoose" })
+      .text(540, 100, getPhrase("TUTORIAL"), { font: "150px Cocogoose" } )
       .setScale(0.4);
 
     this.text = this.add
-      .text(300, 400, "Utiliza las flechas y recolecta la cantidad de brillos necesarios para pasar al siguiente nivel", { font: "40px Cocogoose" })
+    .text(300, 400, getPhrase("USA LAS FLECHAS DE TU TECLADO Y JUNTA TODOS LOS BRILLOS ANTES DE QUE TERMINE EL TIEMPO PARA PASAR AL SIGUIENTE NIVEL"), { font: "40px Cocogoose" })
       .setScale(0.4);
   }
   

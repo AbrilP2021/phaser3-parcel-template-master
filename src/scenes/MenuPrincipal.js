@@ -13,16 +13,34 @@ export default class MenuPrincipal extends Phaser.Scene {
       this.scene.start("TutorialJuego", { nivel: 1 })
     );
 
-    this.add.image(600, 250, "BanderaEEUU").setOrigin(0).setScale(0.2);
-    this.add.image(700, 250, "BanderaArg").setOrigin(0).setScale(0.2);
+    //this.add.image(600, 250, "BanderaEEUU").setOrigin(0).setScale(0.2);
+    //this.add.image(700, 250, "BanderaArg").setOrigin(0).setScale(0.2);
 
-    
 
     const botoninfo = this.add.image(700, 550, "BotonI").setScale(0.3);
     botoninfo.setInteractive();
     botoninfo.on("pointerdown", () => this.scene.start("Creditos"));
 
+
+    const buttonEnglish = this.add.image (600, 250, "BanderaEEUU").setScale(0.3);
+    buttonEnglish.setInteractive()
+    buttonEnglish.on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
+      this.getTranslations(EN_US)
+    })
+
+    const buttonEspañol = this.add.image (700, 250, "BanderaArg").setScale(0.3);
+    buttonEspañol.setInteractive()
+    buttonEspañol.on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
+      this.getTranslations(ES_AR)
+    })
+
     
   }
   update() {}
+
+  async getTranslations(language){
+    this.language = language;
+    this.#wasChangedLanguage = FETCHING;
+    
+    await getTranslations(language) }
 }
