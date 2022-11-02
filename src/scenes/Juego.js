@@ -149,7 +149,7 @@ export default class Juego extends Phaser.Scene {
 
     //TIEMPO
 
-    this.TiempoInicial = this.nivel == 1 ? 90 : 60;
+    this.TiempoInicial = this.nivel == 1 ? 90 : 70;
     console.log("tiempoinicial" + this.TiempoInicial);
 
     this.TimeEvent = this.time.addEvent({

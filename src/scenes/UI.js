@@ -16,8 +16,8 @@ export default class UI extends Phaser.Scene {
       font: "40px",
     });
 
-    this.timeText = this.add.text(1170, 40, "", {
-      font: "30px",
+    this.timeText = this.add.text(1220, 38, "", {
+      font: "40px",
     });
 
     events.on("point-changed", this.handlePointChanged, this);
@@ -30,6 +30,6 @@ export default class UI extends Phaser.Scene {
   }
 
   handleTimeChanged(time) {
-    this.timeText.setText("Tiempo:" + time);
+    this.timeText.setText(time);
   }
 }
