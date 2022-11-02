@@ -14,14 +14,12 @@ export default class Juego extends Phaser.Scene {
   textopuntos;
   recogerbrillo;
   timeText;
-  TiempoInicial;
   textoVidaJugador;
   TimeEvent;
   superganador;
   enemigos;
   plataform;
   background;
-
 
   constructor() {
     super("Juego");
@@ -35,6 +33,7 @@ export default class Juego extends Phaser.Scene {
 
   create() {
     console.log("nivel ", this.nivel);
+    this.isGameOver = false;
 
     this.puntos = 0;
 
@@ -43,11 +42,8 @@ export default class Juego extends Phaser.Scene {
     this.physics.world.bounds.height = 1537;
 
     if (this.nivel === 1) {
-      
       this.add.image(0, 0, "FondoNivelUno").setOrigin(0).setScale(0.5);
       this.add.image(800, 900, "FondoNivelUno").setOrigin(0).setScale(0.5);
-     
-  
     } else {
       this.add.image(0, 0, "FondoNivelDos").setOrigin(0).setScale(0.5);
       this.add.image(800, 900, "FondoNivelDos").setOrigin(0).setScale(0.5);
@@ -95,7 +91,6 @@ export default class Juego extends Phaser.Scene {
 
     this.add.image(1250, 720, "teclas").setScale(0.5).setScrollFactor(0);
     this.add.image(1250, 50, "cronometro").setScale(0.4).setScrollFactor(0);
-  
 
     //PERSONAJE
 
@@ -167,7 +162,6 @@ export default class Juego extends Phaser.Scene {
     if (this.nivel == 1) {
       this.scene.launch("ui");
     }
-
   }
 
   update() {
@@ -199,12 +193,15 @@ export default class Juego extends Phaser.Scene {
   }
 
   gameOver() {
+    this.isGameOver = true;
+    this.time.removeEvent(this.TimeEvent);
+
     this.scene.start("Perdiste");
   }
 
   timer() {
     console.log("tiempo restante " + this.TiempoInicial);
-    if (!this.gameOver) {
+    if (!this.isGameOver) {
       this.TiempoInicial = this.TiempoInicial - 1;
 
       events.emit("time-changed", this.TiempoInicial);
