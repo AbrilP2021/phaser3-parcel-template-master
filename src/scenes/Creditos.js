@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { getPhrase } from "../services/translations";
 
 export default class Creditos extends Phaser.Scene {
   constructor() {

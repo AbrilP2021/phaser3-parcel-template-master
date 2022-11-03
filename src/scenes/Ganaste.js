@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { getPhrase } from "../services/translations";
 
 export default class Ganaste extends Phaser.Scene {
   init(data) {
