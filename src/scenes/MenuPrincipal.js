@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import { EN_US, ES_AR } from "../enums/languages";
+import { getTranslations } from "../services/translations";
 
 export default class MenuPrincipal extends Phaser.Scene {
   constructor() {
@@ -40,7 +42,6 @@ export default class MenuPrincipal extends Phaser.Scene {
 
   async getTranslations(language){
     this.language = language;
-    this.#wasChangedLanguage = FETCHING;
     
     await getTranslations(language) }
 }
